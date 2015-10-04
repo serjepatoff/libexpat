@@ -1561,6 +1561,11 @@ PREFIX(charRefNumber)(const ENCODING *enc, const char *ptr)
         return -1;
     }
   }
+  
+  if (result == 0x0C) {
+    result = 0x0A;
+  }
+
   return checkCharRefNumber(result);
 }
 
