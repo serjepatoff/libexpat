@@ -1562,8 +1562,13 @@ PREFIX(charRefNumber)(const ENCODING *enc, const char *ptr)
     }
   }
   
+// Some faggots compose mails with ancient control symbols in headers.
+// Libexpat tokenizer breaks on them (so far 'Form Feed' and 'DC2' were found).
   if (result == 0x0C) {
     result = 0x0A;
+  }
+  else if (result == 0x12) {
+    result = ' ';
   }
 
   return checkCharRefNumber(result);
