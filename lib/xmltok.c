@@ -1178,8 +1178,14 @@ checkCharRefNumber(int result)
   case 0xDC: case 0xDD: case 0xDE: case 0xDF:
     return -1;
   case 0:
-    if (latin1_encoding.type[result] == BT_NONXML)
-      return -1;
+    if (latin1_encoding.type[result] == BT_NONXML) {
+      if (result < 32) {
+        return 32;
+      }
+      else {
+        return -1;
+      }
+    }
     break;
   case 0xFF:
     if (result == 0xFFFE || result == 0xFFFF)
